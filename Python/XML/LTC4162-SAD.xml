@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE register_map SYSTEM "register_map.dtd">
+<register_map date="$Date: 2018-05-09 10:47:50 -0400 (Wed, 09 May 2018) $" revision="$Revision: $" source_date="Date: 2018-05-09 10:26:00 -0400 (Wed, 09 May 2018)" source_revision="Revision: 1773">
+	<chip name="LTC4162" title="Advanced Synchronous Switching Battery Charger and PowerPath Manager" word_size="16">
+		<description>The LTC®4162-S is an advanced synchronous switching battery charger and PowerPath manager that seamlessly manages power distribution from input sources such as wall adapters, backplanes, solar panels, etc. and a rechargeable battery. A high resolution telemetry system provides extensive information on circuit voltages, currents, battery resistance and temperatures which can all be read back over the serial interface. The serial interface can also be used to configure many of the charging parameters as well as numerous system status alerts. The LTC4162-S can charge from one to four 6V Lead-Acid batteries or one to two 12V Lead-Acid batteries with up to 3.2A of charge current. The power path topology decouples the output voltage from the battery allowing a portable product to start up under very low battery voltage conditions. The LTC4162-S is available in an I²C adjustable version as well a fixed voltage version both with and without MPPT enabled by default. The LTC4162-S is available in the 28-pin 4mm × 5mm × 0.75mm QFN surface mount package.</description>
+		<address address_7bit="0x68"/>
+		<command_code name="VBAT_LO_ALERT_LIMIT_REG" value="0x01">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="usr_alert_limit" name="vbat_lo_alert_limit" offset="0" size="16">
+				<description>Signed number that sets a lower limit that can be used to trigger an interrupt based on the battery voltage out of range. The alert is enabled by setting en_vbat_lo_alert and can be read back and cleared at vbat_lo_alert. The value is based on the A/D value, vbat, which has a scaling factor of 384.8µV/LSB for each multiple of 6V chosen by the CELLS0/CELLS1 pins. To compute the total battery voltage multiply this value by 1, 2, 3 or 4 representing a 6V, 12V, 18V or 24V battery respectively.</description>
+				<default>0</default>
+				<format name="vbat_sla_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="VBAT_HI_ALERT_LIMIT_REG" value="0x02">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="usr_alert_limit" name="vbat_hi_alert_limit" offset="0" size="16">
+				<description>Signed number that sets an upper limit that can be used to trigger an interrupt based on the battery voltage out of range. The alert is enabled by setting en_vbat_hi_alert and can be read back and cleared at vbat_hi_alert. The value is based on the A/D value, vbat, which has a scaling factor of 384.8µV/LSB for each multiple of 6V chosen by the CELLS0/CELLS1 pins. To compute the total battery voltage multiply this value by 1, 2, 3 or 4 representing a 6V, 12V, 18V or 24V battery respectively.</description>
+				<default>0</default>
+				<format name="vbat_sla_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="VIN_LO_ALERT_LIMIT_REG" value="0x03">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="usr_alert_limit" name="vin_lo_alert_limit" offset="0" size="16">
+				<description>Signed number that sets a lower limit that can be used to trigger an interrupt based on input voltage out of range. The value is based on the A/D value, vin, which has a scaling factor of 1.649mV/LSB. The alert is enabled by setting en_vin_lo_alert and can be read back and cleared at vin_lo_alert.</description>
+				<default>0</default>
+				<format name="vin_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="VIN_HI_ALERT_LIMIT_REG" value="0x04">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="usr_alert_limit" name="vin_hi_alert_limit" offset="0" size="16">
+				<description>Signed number that sets an upper limit that can be used to trigger an interrupt based on input voltage out of range. The value is based on the A/D value, vin, which has a scaling factor of 1.649mV/LSB. The alert is enabled by setting en_vin_hi_alert and can be read back and cleared at vin_hi_alert.</description>
+				<default>0</default>
+				<format name="vin_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="VOUT_LO_ALERT_LIMIT_REG" value="0x05">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="usr_alert_limit" name="vout_lo_alert_limit" offset="0" size="16">
+				<description>Signed number that sets a lower limit that can be used to trigger an interrupt based on vout voltage out of range. The value is based on the A/D value, vout, which has a scaling factor of 1.653mV/LSB. The alert is enabled by setting en_vout_lo_alert and can be read back and cleared at vout_lo_alert.</description>
+				<default>0</default>
+				<format name="vout_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="VOUT_HI_ALERT_LIMIT_REG" value="0x06">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="usr_alert_limit" name="vout_hi_alert_limit" offset="0" size="16">
+				<description>Signed number that sets an upper limit that can be used to trigger an interrupt based on vout voltage out of range. The value is based on the A/D value, vout, which has a scaling factor of 1.653mV/LSB. The alert is enabled by setting en_vout_hi_alert and can be read back and cleared at vout_hi_alert.</description>
+				<default>0</default>
+				<format name="vout_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="IIN_HI_ALERT_LIMIT_REG" value="0x07">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="usr_alert_limit" name="iin_hi_alert_limit" offset="0" size="16">
+				<description>Signed number that sets an upper limit that can be used to trigger an interrupt based on input current out of range. The value is based on the A/D value, iin, which has a scaling factor of 1.466µV / RSNSI amperes/LSB. The alert is enabled by setting en_iin_hi_alert and can be read back and cleared at iin_hi_alert.</description>
+				<default>0</default>
+				<format name="iin_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="IBAT_LO_ALERT_LIMIT_REG" value="0x08">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="usr_alert_limit" name="ibat_lo_alert_limit" offset="0" size="16">
+				<description>Signed number that sets a lower limit that can be used to trigger an interrupt based on charge current dropping below a particular value, such as during the constant-voltage phase of charging, or, load current exceeding a particular limit when not charging. When the charger is not running, and telemetry is enabled with force_telemetry_on, this limit indicates that the battery draw has exceeded a particular value. Telemetry will be enabled automatically if the input voltage exceeds the battery voltage, in which case discharge current will be nearly zero. ibat values are positive for charging and negative for discharging so the polarity of this register should be set according to the mode in which the limit alert is of interest. The value is based on the A/D value, ibat, which has a scaling factor of 1.466µV / RSNSB amperes/LSB. The alert is enabled by setting en_ibat_lo_alert and can be read back and cleared at ibat_lo_alert.</description>
+				<default>0</default>
+				<format name="ibat_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="DIE_TEMP_HI_ALERT_LIMIT_REG" value="0x09">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="usr_alert_limit" name="die_temp_hi_alert_limit" offset="0" size="16">
+				<description>Signed number that sets an upper limit that can be used to trigger an interrupt based on high die temperature. The value in °C can be calculated from the A/D reading, die_temp, as TDIE(°C) = die_temp × 0.0215°C/LSB - 264.4°C. The alert is enabled by setting en_die_temp_hi_alert and can be read back and cleared at die_temp_hi_alert.</description>
+				<default>0</default>
+				<format name="die_temp_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="BSR_HI_ALERT_LIMIT_REG" value="0x0A">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="usr_alert_limit" name="bsr_hi_alert_limit" offset="0" size="16">
+				<description>Sets an upper limit that can be used to trigger an interrupt based on high battery resistance. The battery resistance measurement is proportional to the battery charge current setting resistor, RSNSB, and can be computed in Ω from: BSR = N × bsr × RSNSB / 250 where N is 1, 2, 3 or 4 for a 6V, 12V, 18V or 24V battery respectively as set by the CELLS0/CELLS1 pins. The alert is enabled by setting en_bsr_hi_alert and can be read back and cleared at bsr_hi_alert.</description>
+				<default>0</default>
+				<format name="bsr_format_sla"/>
+			</bit_field>
+		</command_code>
+		<command_code name="THERMISTOR_VOLTAGE_HI_ALERT_LIMIT_REG" value="0x0B">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="usr_alert_limit" name="thermistor_voltage_hi_alert_limit" offset="0" size="16">
+				<description>Signed number that sets an upper limit that can be used to trigger an interrupt based on thermistor value out of range. The value is based on the A/D value for thermistor_voltage. The thermistor value can be determined by the expression RNTC = RNTCBIAS × (21829 - thermistor_voltage) / thermistor_voltage. Recall that the thermistor has a negative temperature coefficient so higher temperatures correspond to lower thermistor_voltage readings and vice-versa. The alert is enabled by setting en_thermistor_voltage_hi_alert can be read back and cleared at thermistor_voltage_hi_alert.</description>
+				<default>0</default>
+				<format name="NTCS0402E3103FLT"/>
+			</bit_field>
+		</command_code>
+		<command_code name="THERMISTOR_VOLTAGE_LO_ALERT_LIMIT_REG" value="0x0C">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="usr_alert_limit" name="thermistor_voltage_lo_alert_limit" offset="0" size="16">
+				<description>Signed number that sets a lower limit that can be used to trigger an interrupt based on thermistor value out of range. The value is based on the A/D value for thermistor_voltage. The thermistor value can be determined by the expression RNTC = RNTCBIAS × (21829 - thermistor_voltage) / thermistor_voltage. Recall that the thermistor has a negative temperature coefficient so higher temperatures correspond to lower thermistor_voltage readings and vice-versa. The alert is enabled by setting en_thermistor_voltage_lo_alert and can be read back and cleared at thermistor_voltage_lo_alert.</description>
+				<default>0</default>
+				<format name="NTCS0402E3103FLT"/>
+			</bit_field>
+		</command_code>
+		<command_code name="EN_LIMIT_ALERTS_REG" value="0x0D">
+			<description>Enable limit monitoring and alert notification via SMBALERT</description>
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="usr_alert_enables" name="en_telemetry_valid_alert" offset="15" size="1">
+				<description>To ensure high measurement accuracy, the telemetry system in the LTC4162 has a nominal start-up time of approximately 12ms. Setting this interrupt request causes an SMBALERT telemetry_valid_alert when telemetry_valid indicates that the telemetry system's readings are valid. Note that the switching battery charger will not operate until this telemetry system warmup period has passed, regardless of the state of this setting.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="usr_alert_enables" name="en_bsr_done_alert" offset="14" size="1">
+				<description>Interrupt request that causes an SMBALERT upon bsr_done_alert when the bsr (battery-series-resistance) measurement is finished.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="usr_alert_enables" name="en_vbat_lo_alert" offset="11" size="1">
+				<description>Interrupt request that causes an SMBALERT upon vbat_lo_alert when vbat is below vbat_lo_alert_limit.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="usr_alert_enables" name="en_vbat_hi_alert" offset="10" size="1">
+				<description>Interrupt request that causes an SMBALERT upon vbat_hi_alert when vbat is above vbat_hi_alert_limit.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="usr_alert_enables" name="en_vin_lo_alert" offset="9" size="1">
+				<description>Interrupt request that causes an SMBALERT upon vin_lo_alert when vin is below vin_lo_alert_limit.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="usr_alert_enables" name="en_vin_hi_alert" offset="8" size="1">
+				<description>Interrupt request that causes an SMBALERT upon vin_hi_alert when vin is above vin_hi_alert_limit.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="usr_alert_enables" name="en_vout_lo_alert" offset="7" size="1">
+				<description>Interrupt request that causes an SMBALERT upon vout_lo_alert when vout is below vout_lo_alert_limit.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="usr_alert_enables" name="en_vout_hi_alert" offset="6" size="1">
+				<description>Interrupt request that causes an SMBALERT upon vout_hi_alert when vout is above vout_hi_alert_limit.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="usr_alert_enables" name="en_iin_hi_alert" offset="5" size="1">
+				<description>Interrupt request that causes an SMBALERT upon iin_hi_alert when iin is above iin_hi_alert_limit.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="usr_alert_enables" name="en_ibat_lo_alert" offset="4" size="1">
+				<description>Interrupt request that causes an SMBALERT upon ibat_lo_alert when ibat is below ibat_lo_alert_limit.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="usr_alert_enables" name="en_die_temp_hi_alert" offset="3" size="1">
+				<description>Interrupt request that causes an SMBALERT upon die_temp_hi_alert when die_temp is above die_temp_hi_alert_limit.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="usr_alert_enables" name="en_bsr_hi_alert" offset="2" size="1">
+				<description>Interrupt request that causes an SMBALERT upon bsr_hi_alert when bsr is above bsr_hi_alert_limit.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="usr_alert_enables" name="en_thermistor_voltage_hi_alert" offset="1" size="1">
+				<description>Interrupt request that causes an SMBALERT upon thermistor_voltage_hi_alert when thermistor_voltage is above thermistor_voltage_hi_alert_limit. Recall that the thermistor has a negative temperature coefficient so higher thermistor_voltage readings correspond to lower temperatures.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="usr_alert_enables" name="en_thermistor_voltage_lo_alert" offset="0" size="1">
+				<description>Interrupt request that causes an SMBALERT upon thermistor_voltage_lo_alert when thermistor_voltage is below thermistor_voltage_lo_alert_limit. Recall that the thermistor has a negative temperature coefficient so lower thermistor_voltage readings correspond to higher temperatures.</description>
+				<default>0</default>
+			</bit_field>
+		</command_code>
+		<command_code name="EN_CHARGER_STATE_ALERTS_REG" value="0x0E">
+			<description>Enable charger state notification via SMBALERT</description>
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="charger_alert_enables" name="en_bat_detect_failed_fault_alert" offset="12" size="1">
+				<description>Interrupt request that causes an SMBALERT upon bat_detect_failed_fault_alert as indicated by bat_detect_failed_fault due to an inability to source power to the battery during battery detection testing (usually due to either iin_limit_active or vin_uvcl_active).</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="charger_alert_enables" name="en_battery_detection_alert" offset="11" size="1">
+				<description>Interrupt request that causes an SMBALERT upon battery_detection_alert as indicated by battery_detection due to the LTC4162 entering battery detection testing.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="charger_alert_enables" name="en_equalize_charge_alert" offset="10" size="1">
+				<description>Interrupt request that causes an SMBALERT upon equalization_charge_alert when the equalize_charge phase of a battery charge cycle begins.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="charger_alert_enables" name="en_absorb_charge_alert" offset="9" size="1">
+				<description>Interrupt request that causes an SMBALERT upon absorb_charge_alert when the absorb_charge phase of a battery charge cycle begins.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="charger_alert_enables" name="en_charger_suspended_alert" offset="8" size="1">
+				<description>Interrupt request that causes an SMBALERT upon charger_suspended_alert as indicated by charger_suspended whereby battery charging is terminated due to suspend_charger.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="charger_alert_enables" name="en_cc_cv_charge_alert" offset="6" size="1">
+				<description>Interrupt request that causes an SMBALERT upon cc_cv_charge_alert as indicated by cc_cv_charge denoting the onset of the constant current / constant voltage phase of a battery charging cycle.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="charger_alert_enables" name="en_bat_missing_fault_alert" offset="1" size="1">
+				<description>Interrupt request that causes an SMBALERT upon bat_missing_fault_alert as indicated by bat_missing_fault whereby charging is prohibited if no battery is detected during the battery presence detection phase at the beginning of a charge cycle.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="charger_alert_enables" name="en_bat_short_fault_alert" offset="0" size="1">
+				<description>Interrupt request that causes an SMBALERT upon bat_short_fault_alert as indicated by bat_short_fault whereby charging is prohibited if a shorted battery is detected during the battery presence detection phase at the beginning of a charge cycle.</description>
+				<default>0</default>
+			</bit_field>
+		</command_code>
+		<command_code name="EN_CHARGE_STATUS_ALERTS_REG" value="0x0F">
+			<description>Enable charge status notification via SMBALERT</description>
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="charger_alert_enables" name="en_ilim_reg_active_alert" offset="5" size="1">
+				<description>Interrupt request that causes an ilim_reg_active_alert SMBALERT upon ilim_reg_active (VCSP-VCSN greater than 45mV). May indicates that the switching regulator is currently controlling power delivery based on a safety current limit. This should not occur under normal conditions and is likely the result of a circuit board fault. Alternately indicates that the switching regulator is in dropout (near 100% duty cycle) and is not regulating on any feedback control loop.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="charger_alert_enables" name="en_thermal_reg_active_alert" offset="4" size="1">
+				<description>Interrupt request that causes a thermal_reg_active_alert SMBALERT upon thermal_reg_active indicating that the icharge_dac is being dialed back to reduce internal die heating.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="charger_alert_enables" name="en_vin_uvcl_active_alert" offset="3" size="1">
+				<description>Interrupt request that causes a vin_uvcl_active_alert SMBALERT upon vin_uvcl_active indicating that the undervoltage regulation loop has taken control of the switching regulator.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="charger_alert_enables" name="en_iin_limit_active_alert" offset="2" size="1">
+				<description>Interrupt request that causes a iin_limit_active_alert SMBALERT upon iin_limit_active indicating that the input current regulation loop has taken control of the switching regulator.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="charger_alert_enables" name="en_constant_current_alert" offset="1" size="1">
+				<description>Interrupt request that causes a constant_current_alert SMBALERT upon constant_current indicating that the battery charger constant current regulation loop has taken control of the switching regulator.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="charger_alert_enables" name="en_constant_voltage_alert" offset="0" size="1">
+				<description>Interrupt request that causes a constant_voltage_alert SMBALERT upon constant_voltage indicating that the battery charger constant voltage regulation loop has taken control of the switching regulator.</description>
+				<default>0</default>
+			</bit_field>
+		</command_code>
+		<command_code name="THERMAL_REG_START_TEMP_REG" value="0x10">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="charger_settings" name="thermal_reg_start_temp" offset="0" size="16">
+				<description>Signed number that sets the start of the temperature region for thermal regulation. To prevent overheating, a thermal regulation feedback loop utilizing die_temp sets an upper limit on icharge_dac following a linear gradient from full scale (31) to minimum scale (0) between thermal_reg_start_temp and thermal_reg_end_temp. The default value of 17897 corresponds to 120°C.</description>
+				<default>17897</default>
+				<format name="die_temp_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="THERMAL_REG_END_TEMP_REG" value="0x11">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="charger_settings" name="thermal_reg_end_temp" offset="0" size="16">
+				<description>Signed number that sets the end of the temperature region for thermal regulation. To prevent overheating, a thermal regulation feedback loop utilizing die_temp sets an upper limit on icharge_dac following a linear gradient from full scale (31) to minimum scale (0) between thermal_reg_start_temp and thermal_reg_end_temp. The default value of 18130 corresponds to 125°C.</description>
+				<default>18130</default>
+				<format name="die_temp_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="CONFIG_BITS_REG" value="0x14">
+			<description>System configuration settings</description>
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="system_settings" name="suspend_charger" offset="5" size="1">
+				<description>Causes battery charging to be suspended. This setting should be used cautiously. For embedded battery systems where two wire interface communication relies on a minimum battery voltage, setting this bit could result in a deadlock that may require factory service to correct.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="system_settings" name="run_bsr" offset="4" size="1">
+				<description>Causes the battery equivalent-series-resistance (bsr) measurement to be made as soon as a charge cycle starts or immediately if a charge cycle is already running.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="system_settings" name="telemetry_speed" offset="3" size="1">
+				<description>Forces the telemetry system to take measurements at the higher rate of approximately once every 11ms whenever the telemetry system is on. When this bit is disabled, the telemetry system will slow down to about once every 5s to reduce power when not charging. Setting telemetry_speed to tel_high_speed in conjunction with force_telemetry_on with no input power available will increase battery drain.</description>
+				<default>0</default>
+				<preset name="tel_high_speed" value="1"/>
+				<preset name="tel_low_speed" value="0"/>
+			</bit_field>
+			<bit_field category="system_settings" name="force_telemetry_on" offset="2" size="1">
+				<description>Causes the telemetry system to operate at all times, including times when only battery power is available.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="system_settings" name="mppt_en" offset="1" size="1">
+				<description>Causes the Maximum Power-Point Tracking algorithm to run. The maximum power point algorithm takes control of the input undervoltage regulation control loop via the input_undervoltage_dac to seek the optimum power-point for resistive sources such as a long cable or solar panel.</description>
+				<default>0</default>
+			</bit_field>
+			<bit_field category="system_settings" name="equalize_req" offset="0" size="1">
+				<description>Runs, or queues up to run, an equalization phase upon completion of an absorption phase by either tabsorbtimer reaching max_absorb_time or ibat dropping below the c_over_x_threshold in absorb_charge. equalize_req will automatically self clear upon completion of an equalization phase which expires when tequalizetimer reaches max_equalize_time or the charger is suspended with suspend_charger or a power cycle. equalize_req can be written to zero at any time to cancel an equalization phase.</description>
+				<default>0</default>
+			</bit_field>
+		</command_code>
+		<command_code name="IIN_LIMIT_TARGET_REG" value="0x15">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="switcher_settings" name="iin_limit_target" offset="0" size="6">
+				<description>Controls the target input current limit setting. The input current is limited by regulating charge current in response to the voltage across an external current sense resistor, RSNSI, between the CLP and CLN pins and is given by (iin_limit_target + 1) × 500µV / RSNSI. Note that the LTC4162 can only limit charge current based on this setting. It does not have the authority to block current from passing directly through to the system load. Connecting the system load to the battery, however, can allow total input current control.</description>
+				<default>63</default>
+				<format name="iinlim"/>
+			</bit_field>
+		</command_code>
+		<command_code name="INPUT_UNDERVOLTAGE_SETTING_REG" value="0x16">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="switcher_settings" name="input_undervoltage_setting" offset="0" size="8">
+				<description>Controls the input undervoltage regulation setting. The regulation voltage, given by (input_undervoltage_setting + 1) × 140.625mV, is the voltage at which the charge current will be reduced to prevent further droop in supply voltage due to a resistive source. If mppt_en is set, the MPPT algorithm will override this setting. The actual input undervoltage value can be read back from the input_undervoltage_dac.</description>
+				<default>31</default>
+				<format name="vin_uvcl"/>
+			</bit_field>
+		</command_code>
+		<command_code name="ARM_SHIP_MODE_REG" value="0x19">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="system_settings" name="arm_ship_mode" offset="0" size="16">
+				<description>Setting this register to arm arms the ultra low-power ship and store mode. Ship mode does not take effect until the VIN pin drops below approximately 1V or immediately if VIN is already below 1V.</description>
+				<default>0</default>
+				<preset name="arm" value="21325">
+                </preset>
+			</bit_field>
+		</command_code>
+		<command_code name="CHARGE_CURRENT_SETTING_REG" value="0x1A">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="charger_settings" name="charge_current_setting" offset="0" size="5">
+				<description>Controls the target charge current regulation servo level. The charge current is regulated by servoing the voltage across an external current sense resistor, RSNSB, between the CSP and CSN pins. The servo voltage is given by (charge_current_setting + 1) × 1mV. The effective charge current, determined by the external resistor, RSNSB, is given by (charge_current_setting + 1) × 1mV / RSNSB. icharge_dac will follow charge_current_setting unless thermal_reg_active is true.</description>
+				<default>31</default>
+				<format name="icharge"/>
+			</bit_field>
+		</command_code>
+		<command_code name="VCHARGE_SETTING_REG" value="0x1B">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="charger_settings" name="vcharge_setting" offset="0" size="6">
+				<description>Controls the final charge voltage regulation servo level. To maintain inherent over-charge protection, only Lead Acid appropriate charge voltage values can be selected. The charge voltage setting can be computed from N × (vcharge_dac × 28.571mV + 6.0V) (max value = 7.8V) where N is 1 for a 6V battery, 2 for a 12V battery, 3 for an 18V battery, 4 for a 24V battery and vcharge_setting ranges from 0 to 63. vcharge_dac will follow vcharge_setting unless the Lead-Acid Temperature Compensated Charging algorithm (en_sla_temp_comp) alters it.</description>
+				<default>21</default>
+				<preset name="vcharge_sla_default" value="21"/>
+				<format name="vcharge_sla"/>
+			</bit_field>
+		</command_code>
+		<command_code name="C_OVER_X_THRESHOLD_REG" value="0x1C">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="charger_settings" name="c_over_x_threshold" offset="0" size="16">
+				<description>Signed number that sets the ibat A/D value used to qualify C/x detection and absorb phase termination. The C/x level is based on the value for ibat which has a scaling factor of 1.466µV / RSNSB amperes/LSB. For example, to make the C/x level C/10 (a very common choice) then c_over_x_threshold should be set to c_over_10 which is 10% of the maximum possible ibat reading (32mV × 37.5 × 18,191 / 10). 32mV is the full scale charge current signal from CSP to CSN, 37.5 is the internal charge amplifier's gain and 18,191 is the A/D's span term in counts per Volt.</description>
+				<default>2184</default>
+				<preset name="c_over_10" value="2184"/>
+				<format name="ibat_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="CHARGER_CONFIG_BITS_REG" value="0x29">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="charger_settings" name="en_sla_temp_comp" offset="1" size="1">
+				<description>Enables the temperature compensated charging system. When en_sla_temp_comp is disabled, charge voltage control reverts to vcharge_setting.</description>
+				<default>1</default>
+			</bit_field>
+		</command_code>
+		<command_code name="VABSORB_DELTA_REG" value="0x2A">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="charger_settings" name="vabsorb_delta" offset="0" size="6">
+				<description>Controls the absorb adder voltage in the absorb charging phase. The absorb charging phase cell voltage servo level is based on the sum of this value and the vcharge_setting level. The absorb voltage level is given by N × ((vabsorb_delta + vcharge_setting) × 28.571mV + 6.0V) where N is 1 for a 6V battery, 2 for a 12V battery, 3 for an 18V battery and 4 for a 24V battery. If en_sla_temp_comp is set, the equalize voltage level is given by this expression at 25°C but tracks temperature at N × -11mV/°C. The total voltage is limited by hardware to a maximum of N × 7.8V. The default value of 21 corresponds to an additional N × 600mV. Setting vabsorb_delta to 0 disables the absorb charging phase.</description>
+				<default>21</default>
+				<preset name="vabsorb_sla_default" value="21"/>
+				<preset name="vabsorb_disable" value="0"/>
+				<format name="vabsorb_sla_delta"/>
+			</bit_field>
+		</command_code>
+		<command_code name="MAX_ABSORB_TIME_REG" value="0x2B">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="charger_settings" name="max_absorb_time" offset="0" size="16">
+				<description>At 1 second per count, this register sets an upper limit on the time the LTC4162 can be in the absorb, or rapid, charge phase. The actual timer value is reported in tabsorbtimer. The default value of 5400 equates to 1.5 hours.</description>
+				<default>5400</default>
+				<preset name="absorb_15mins" value="900"/>
+				<preset name="absorb_30mins" value="1800"/>
+				<preset name="absorb_1hours" value="3600"/>
+				<preset name="absorb_90mins" value="5400"/>
+				<preset name="absorb_2hours" value="7200"/>
+			</bit_field>
+		</command_code>
+		<command_code name="V_EQUALIZE_DELTA_REG" value="0x2C">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="charger_settings" name="v_equalize_delta" offset="0" size="6">
+				<description>If equalize_req is set, this value controls the equalize adder voltage for batteries in the equalize_charge phase. The equalize charge phase battery voltage servo level is based on the sum of this adder voltage and the vcharge_setting level. If en_sla_temp_comp is not set, the equalize voltage level is given by N × ((v_equalize_delta + vcharge_setting) × 28.571mV + 6.0V) where N is 1 for a 6V battery, 2 for a 12V battery, 3 for an 18V battery and 4 for a 24V battery. If en_sla_temp_comp is set, the equalize voltage level is given by this expression at 25°C but tracks temperature at N × -11.4mV/°C. The default value of 42 corresponds to an equalize voltage of N × 7.8V. To maintain inherent over-charge protection, N × 7.8V is the maximum achievable servo voltage.</description>
+				<default>42</default>
+				<format name="vequalize_sla_delta"/>
+			</bit_field>
+		</command_code>
+		<command_code name="EQUALIZE_TIME_REG" value="0x2D">
+			<access mode="user_i2c_mode" type="read"/>
+			<access mode="user_i2c_mode" type="write"/>
+			<bit_field category="charger_settings" name="max_equalize_time" offset="0" size="16">
+				<description>If equalize_req is set, this register sets an upper limit on the time (at 1 second per count) that the LTC4162 can be in the equalize_charge phase. The actual timer value is reported in tequalizetimer.</description>
+				<default>3600</default>
+			</bit_field>
+		</command_code>
+		<command_code name="TABSORBTIMER_REG" value="0x32">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="charger_status" name="tabsorbtimer" offset="0" size="16">
+				<description>This is the elapsed time in seconds that the LTC4162 has been in the absorb phase of charging. If this value exceeds max_absorb_time, the absorb phase is terminated and normal charging resumes.</description>
+			</bit_field>
+		</command_code>
+		<command_code name="TEQUALIZETIMER_REG" value="0x33">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="charger_status" name="tequalizetimer" offset="0" size="16">
+				<description>This is the elapsed time in seconds that the LTC4162 has been in the equalize_charge phase of charging. Once this value reaches max_equalize_time, the equalize charge phase is terminated and normal charging resumes.</description>
+			</bit_field>
+		</command_code>
+		<command_code name="CHARGER_STATE_REG" value="0x34">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="charger_status" name="charger_state" offset="0" size="13">
+				<description>Real time battery charger state indicator. Individual bits are mutually exclusive.</description>
+				<preset name="bat_detect_failed_fault" value="4096">
+					<description>Indicates that the battery charger is not charging due to an inability to source power during the battery detection test because either vin_uvcl_active or iin_limit_active regulation was true during the battery detection phase of a charge cycle.</description>
+				</preset>
+				<preset name="battery_detection" value="2048">
+					<description>Indicates that the LTC4162 is in the battery detection phase of a charge cycle.</description>
+				</preset>
+				<preset name="equalize_charge" value="1024">
+					<description>Indicates that the LTC4162 is in the equalize phase of charging as requested by equalize_req.</description>
+				</preset>
+				<preset name="absorb_charge" value="512">
+					<description>Indicates that the LTC4162 is in the absorb, or rapid, phase of charging.</description>
+				</preset>
+				<preset name="charger_suspended" value="256">
+					<description>Indicates that the battery charging feature is currently suspended due to suspend_charger</description>
+				</preset>
+				<preset name="cc_cv_charge" value="64">
+					<description>Indicates that the LTC4162 is in either the constant_current or constant_voltage phase of charging.</description>
+				</preset>
+				<preset name="bat_missing_fault" value="2">
+					<description>Indicates that the battery charger is not charging because no battery was found during the battery detection test at the beginning of a charge cycle or if, at any time, the thermistor_voltage goes above 21,684 indicating an open or missing thermistor.</description>
+				</preset>
+				<preset name="bat_short_fault" value="1">
+					<description>Indicates that the battery charger is not charging because the battery was found to be shorted during the battery detection test at the beginning of a charge cycle.</description>
+				</preset>
+			</bit_field>
+		</command_code>
+		<command_code name="CHARGE_STATUS_REG" value="0x35">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="charger_status" name="charge_status" offset="0" size="6">
+				<description>Charge status indicator. Individual bits are mutually exclusive and are only active in charging states.</description>
+				<preset name="ilim_reg_active" value="32">
+					<description>May indicate that the switching regulator is currently controlling power delivery based on a safety current limit (~45mV from CSP to CSN). This should not occur under normal conditions and is likely the result of a circuit board fault. Alternately indicates that the switching regulator is in dropout (highest possible duty cycle) and is not regulating on any feedback control loop.</description>
+				</preset>
+				<preset name="thermal_reg_active" value="16">
+					<description>Indicates that the icharge_dac has been automatically throttled because the die_temp has reached thermal_reg_start_temp.</description>
+				</preset>
+				<preset name="vin_uvcl_active" value="8">
+					<description>Indicates that the input voltage control loop is currently controlling power delivery to the battery based on the input_undervoltage_dac which normally targets input_undervoltage_setting. This control loop is manipulated internally when mppt_en is set.</description>
+				</preset>
+				<preset name="iin_limit_active" value="4">
+					<description>Indicates that the input current control loop is currently controlling power delivery to the battery based on iin_limit_dac which normally targets iin_limit_target.</description>
+				</preset>
+				<preset name="constant_current" value="2">
+					<description>Indicates that the charge current control loop is currently controlling power delivery to the battery based on icharge_dac which normally targets charge_current_setting.</description>
+				</preset>
+				<preset name="constant_voltage" value="1">
+					<description>Indicates that the charge voltage control loop is currently controlling power delivery to the battery based on vcharge_dac which normally targets vcharge_setting. This control loop is manipulated internally if en_sla_temp_comp is true.</description>
+				</preset>
+				<preset name="charger_off" value="0">
+					<description>Indicates that the charger is not currently running. Due to a logic error this state may transiently appear during normal operation. Sampling it several times is recommended.</description>
+				</preset>
+			</bit_field>
+		</command_code>
+		<command_code name="LIMIT_ALERTS_REG" value="0x36">
+			<description>Limit alert register. This input/output register indicates that an enabled alert has occurred. Individual alerts are enabled in EN_LIMIT_ALERTS_REG. Writing 0 to any bit clears that alert. Once set, alert bits remain high until cleared or disabled.</description>
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="alerts" name="telemetry_valid_alert" offset="15" size="1">
+				<description>Alert that indicates that the telemetry system warm-up time has expired and valid telemetry data is available from the serial port. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_telemetry_valid_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="bsr_done_alert" offset="14" size="1">
+				<description>Alert that indicates that the battery equivalent-series-resistance measurement is finished and a result is available in bsr. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_bsr_done_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="vbat_lo_alert" offset="11" size="1">
+				<description>Alert that indicates that vbat is below the value set by vbat_lo_alert_limit. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_vbat_lo_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="vbat_hi_alert" offset="10" size="1">
+				<description>Alert that indicates that vbat is above the value set by vbat_hi_alert_limit. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_vbat_hi_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="vin_lo_alert" offset="9" size="1">
+				<description>Alert that indicates that vin is below the value set by vin_lo_alert_limit. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_vin_lo_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="vin_hi_alert" offset="8" size="1">
+				<description>Alert that indicates that vin is above the value set by vin_hi_alert_limit. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_vin_hi_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="vout_lo_alert" offset="7" size="1">
+				<description>Alert that indicates that vout is below the value set by vout_lo_alert_limit. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_vout_lo_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="vout_hi_alert" offset="6" size="1">
+				<description>Alert that indicates that vout is above the value set by vout_hi_alert_limit. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_vout_hi_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="iin_hi_alert" offset="5" size="1">
+				<description>Alert that indicates that iin is above the value set by iin_hi_alert_limit. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_iin_hi_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="ibat_lo_alert" offset="4" size="1">
+				<description>Alert that indicates that ibat is below the value set by ibat_lo_alert_limit. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_ibat_lo_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="die_temp_hi_alert" offset="3" size="1">
+				<description>Alert that indicates that die_temp is above the value set by die_temp_hi_alert_limit. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_die_temp_hi_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="bsr_hi_alert" offset="2" size="1">
+				<description>Alert that indicates that bsr is above the value set by bsr_hi_alert_limit. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_bsr_hi_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="thermistor_voltage_hi_alert" offset="1" size="1">
+				<description>Alert that indicates that thermistor_voltage is above the value set by thermistor_voltage_hi_alert_limit. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_thermistor_voltage_hi_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="thermistor_voltage_lo_alert" offset="0" size="1">
+				<description>Alert that indicates that thermistor_voltage is below the value set by thermistor_voltage_lo_alert_limit. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_thermistor_voltage_lo_alert.</description>
+			</bit_field>
+		</command_code>
+		<command_code name="CHARGER_STATE_ALERTS_REG" value="0x37">
+			<description>Alert that indicates that charger states have occurred. Individual bits are enabled by EN_CHARGER_STATE_ALERTS_REG. Writing 0 to any bit while writing 1s to the remaining bits clears that alert. Once set, alert bits remain high until cleared or disabled.</description>
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="alerts" name="bat_detect_failed_fault_alert" offset="12" size="1">
+				<description>Alert that indicates a bat_detect_failed_fault. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_bat_detect_failed_fault_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="battery_detection_alert" offset="11" size="1">
+				<description>Alert that indicates the battery charger is performing battery_detection. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_battery_detecttion_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="equalization_charge_alert" offset="10" size="1">
+				<description>Alert that indicates that the battery charger is in the equalize_charge phase. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_equalize_charge_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="absorb_charge_alert" offset="9" size="1">
+				<description>Alert that indicates that the battery charger is in the absorb_charge phase. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_absorb_charge_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="charger_suspended_alert" offset="8" size="1">
+				<description>Alert that indicates the battery charger is in the charger_suspended state. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_charger_suspended_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="cc_cv_charge_alert" offset="6" size="1">
+				<description>Alert that indicates that the battery charge is in the cc_cv_charge phase. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_cc_cv_charge_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="bat_missing_fault_alert" offset="1" size="1">
+				<description>Alert that indicates that a bat_missing_fault has been detected. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_bat_missing_fault_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="bat_short_fault_alert" offset="0" size="1">
+				<description>Alert that indicates that a bat_short_fault has been detected. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_bat_short_fault_alert.</description>
+			</bit_field>
+		</command_code>
+		<command_code name="CHARGE_STATUS_ALERTS_REG" value="0x38">
+			<description>Alerts that charge_status indicators have occurred. Individual bits are enabled by EN_CHARGE_STATUS_ALERTS_REG. Writing 0 to any bit clears that alert. Once set, alert bits remain high until cleared or disabled.</description>
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="alerts" name="ilim_reg_active_alert" offset="5" size="1">
+				<description>Alert that indicates that charge_status is ilim_reg_active. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_ilim_reg_active_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="thermal_reg_active_alert" offset="4" size="1">
+				<description>Alert that indicates that charge_status is thermal_reg_active. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_thermal_reg_active_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="vin_uvcl_active_alert" offset="3" size="1">
+				<description>Alert that indicates that charge_status is vin_uvcl_active. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_vin_uvcl_active_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="iin_limit_active_alert" offset="2" size="1">
+				<description>Alert that indicates that charge_status is iin_limit_active. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_iin_limit_active_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="constant_current_alert" offset="1" size="1">
+				<description>Alert that indicates that charge_status is constant_current. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_constant_current_alert.</description>
+			</bit_field>
+			<bit_field category="alerts" name="constant_voltage_alert" offset="0" size="1">
+				<description>Alert that indicates that charge_status is constant_voltage. This alert bit is cleared by writing it back to 0 with the remaining bits in this register set to 1s. It can also be cleared by clearing en_constant_voltage_alert.</description>
+			</bit_field>
+		</command_code>
+		<command_code name="SYSTEM_STATUS_REG" value="0x39">
+			<description>Real time system status indicator bits</description>
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="en_chg" offset="8" size="1">
+				<description>Indicates that the battery charger is active.</description>
+			</bit_field>
+			<bit_field category="usr_status" name="cell_count_err" offset="7" size="1">
+				<description>A cell count error will occur and charging will be inhibited if the CELLS0 and CELLS1 pins are programmed for anything other than a 6V, 12V, 18V or 24V battery. cell_count_err always indicates true when telemetry is not enabled such as when the charger is not enabled.</description>
+			</bit_field>
+			<bit_field category="usr_status" name="no_rt" offset="5" size="1">
+				<description>Indicates that no frequency setting resistor is detected on the RT pin. The RT pin impedance detection circuit will typically indicate a missing RT resistor for values above 1.4MΩ. no_rt always indicates true when the battery charger is not enabled such as when there is no input power available.</description>
+			</bit_field>
+			<bit_field category="usr_status" name="thermal_shutdown" offset="4" size="1">
+				<description>Indicates that the LTC4162 is in thermal shutdown protection due to an excessively high die temperature (typically 150°C).</description>
+			</bit_field>
+			<bit_field category="usr_status" name="vin_ovlo" offset="3" size="1">
+				<description>Indicates that input voltage shutdown protection is active due to an input voltage above its protection shut-down threshold of approximately 38.6V.</description>
+			</bit_field>
+			<bit_field category="usr_status" name="vin_gt_vbat" offset="2" size="1">
+				<description>Indicates that the VIN pin voltage is sufficiently above the battery voltage to begin a charge cycle (typically +150mV).</description>
+			</bit_field>
+			<bit_field category="usr_status" name="vin_gt_4p2v" offset="1" size="1">
+				<description>Indicates that the VIN pin voltage is at least greater than the switching regulator under-voltage lockout level (4.2V typical).</description>
+			</bit_field>
+			<bit_field category="usr_status" name="intvcc_gt_2p8v" offset="0" size="1">
+				<description>Indicates that the INTVCC pin voltage is greater than the telemetry system lockout level (2.8V typical).</description>
+			</bit_field>
+		</command_code>
+		<command_code name="VBAT_REG" value="0x3A">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="vbat" offset="0" size="16">
+				<description>Signed number that indicates the A/D measurement for the battery voltage. The value has a scaling factor of 384.8µV/LSB for each multiple of 6V chosen by the CELLS0/CELLS1 pins. To compute the total battery voltage multiply this value by 1, 2, 3 or 4 representing a 6V, 12V, 18V or 24V battery respectively.</description>
+				<format name="vbat_sla_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="VIN_REG" value="0x3B">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="vin" offset="0" size="16">
+				<description>Signed number that indicates the A/D measurement for the input voltage. The value is based on the A/D scaling factor for the input voltage measurement which is 1.649mV/LSB.</description>
+				<format name="vin_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="VOUT_REG" value="0x3C">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="vout" offset="0" size="16">
+				<description>Signed number that indicates the A/D measurement for the vout voltage. The value is based on the A/D scaling factor for the output voltage measurement which is 1.653mV/LSB.</description>
+				<format name="vout_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="IBAT_REG" value="0x3D">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="ibat" offset="0" size="16">
+				<description>Signed number that indicates the A/D measurement for the battery current. The value is based on the A/D scaling factor for the charge current measurement (VCSP - VCSN) which is 1.466µV / RSNSB amperes/LSB. If the charger is not enabled the value represents drain on the battery and will be negative.</description>
+				<format name="ibat_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="IIN_REG" value="0x3E">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="iin" offset="0" size="16">
+				<description>Signed number that indicates the A/D measurement for the input current (VCLP - VCLN). The value is based on the A/D scaling factor for the input current measurement which is 1.466µV / RSNSI amperes/LSB.</description>
+				<format name="iin_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="DIE_TEMP_REG" value="0x3F">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="die_temp" offset="0" size="16">
+				<description>Signed number that indicates the A/D measurement for the die temperature. The value can be calculated from the A/D reading in °C as TDIE(°C) = die_temp × 0.0215°C/LSB - 264.4°C.</description>
+				<format name="die_temp_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="THERMISTOR_VOLTAGE_REG" value="0x40">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="thermistor_voltage" offset="0" size="16">
+				<description>Signed number that indicates the A/D measurement for the NTC pin voltage. The thermistor value can be determined by the expression RNTC = RNTCBIAS × thermistor_voltage / (21829 - thermistor_voltage). Recall that the thermistor has a negative temperature coefficient so higher temperatures make lower thermistor_voltage readings and vice-versa.</description>
+				<preset name="open_thermistor" value="21684"/>
+				<format name="NTCS0402E3103FLT"/>
+			</bit_field>
+		</command_code>
+		<command_code name="BSR_REG" value="0x41">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="bsr" offset="0" size="16">
+				<description>Indicates the A/D measurement for the battery resistance. The battery resistance measurement is proportional to the battery charge current setting resistor, RSNSB, and can be computed in Ω from: BSR = N × bsr × RSNSB / 250 where N is 1, 2, 3 or 4 for a 6V, 12V, 18V or 24V battery respectively as set by the CELLS0/CELLS1 pins. If the charge current, ibat, is below icharge_over_10, bsr_questionable will be set.</description>
+				<format name="bsr_format_sla"/>
+			</bit_field>
+		</command_code>
+		<command_code name="CHEM_CELLS_REG" value="0x43">
+			<description>Programmed battery chemistry</description>
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="chem" offset="8" size="4">
+				<description>Indicates the chemistry of the battery being charged. For additional safety, application software can test this value to ensure that the correct version of the LTC4162 (LTC4162-L, LTC4162-F or LTC4162-S) is populated on the circuit board.</description>
+				<preset name="LTC4162_LAD" value="0">
+					<description>Li-Ion I²C Adjustable Voltage</description>
+				</preset>
+				<preset name="LTC4162_L42" value="1">
+					<description>Li-Ion 4.2V Fixed Charge</description>
+				</preset>
+				<preset name="LTC4162_L41" value="2">
+					<description>Li-Ion 4.1V Fixed Charge</description>
+				</preset>
+				<preset name="LTC4162_L40" value="3">
+					<description>Li-Ion 4.0V Fixed Charge</description>
+				</preset>
+				<preset name="LTC4162_FAD" value="4">
+					<description>LiFePO4 I²C Adjustable Voltage</description>
+				</preset>
+				<preset name="LTC4162_FFS" value="5">
+					<description>LiFePO4 3.8V Rapid Charge</description>
+				</preset>
+				<preset name="LTC4162_FST" value="6">
+					<description>LiFePO4 3.6V Fixed Charge</description>
+				</preset>
+				<preset name="LTC4162_SST" value="8">
+					<description>Lead Acid Fixed Voltage</description>
+				</preset>
+				<preset name="LTC4162_SAD" value="9">
+					<description>Lead Acid I²C Adjustable Voltage</description>
+				</preset>
+			</bit_field>
+			<bit_field category="usr_status" name="cell_count" offset="0" size="4">
+				<description>Indicates the cell count value detected by the CELLS0 and CELLS1 pin strapping. The LTC4162 uses a cell_count value of 2 for each group of 3 physical (2V) cells (i.e. 6V cell_count = 2, 12V cell_count = 4, 18V cell_count = 6 and 24V cell_count = 8). cell_count always indicates 0 when the battery charger is not enabled such as when there is no input power available.</description>
+				<preset name="Unknown" value="0"/>
+				<preset name="6V Battery" value="2"/>
+				<preset name="12V Battery" value="4"/>
+				<preset name="18V Battery" value="6"/>
+				<preset name="24V Battery" value="8"/>
+			</bit_field>
+		</command_code>
+		<command_code name="ICHARGE_DAC_REG" value="0x44">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="icharge_dac" offset="0" size="5">
+				<description>Indicates the actual charge current setting applied to the charge current digital to analog converter. icharge_dac is ramped up/down to implement digital soft-start/stop. The LTC4162 sets the value of icharge_dac based on charger_state. Recall that the charge current is regulated by controlling the voltage across an external current sense resistor RSNSB. The servo voltage is given by (icharge_dac + 1) × 1mV. The charge current servo level is thus given by (icharge_dac + 1) × 1mV/RSNSB.</description>
+				<format name="icharge"/>
+			</bit_field>
+		</command_code>
+		<command_code name="VCHARGE_DAC_REG" value="0x45">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="vcharge_dac" offset="0" size="6">
+				<description>This is the actual battery voltage setting applied to the charge voltage digital to analog converter. The LTC4162 sets the value of vcharge_dac based charger_state, thermistor_voltage, and charger settings including vcharge_setting, vabsorb_delta, v_equalize_delta and en_sla_temp_comp. The charge voltage setting can be computed from N × (vcharge_dac × 28.571mV + 6.0V) where N is 1 for a 6V battery, 2 for a 12V battery, 3 for an 18V battery, 4 for a 24V battery and vcharge_setting ranges from 0 to 63.</description>
+				<format name="vcharge_sla"/>
+			</bit_field>
+		</command_code>
+		<command_code name="IIN_LIMIT_DAC_REG" value="0x46">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="iin_limit_dac" offset="0" size="6">
+				<description>Indicates the actual input current limit. The iin_limit_dac will follow the value programmed in iin_limit_target. The input current will be regulated to a maximum value given by (iin_limit_dac + 1) × 500µV / RSNSI.</description>
+				<format name="iinlim"/>
+			</bit_field>
+		</command_code>
+		<command_code name="VBAT_FILT_REG" value="0x47">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="vbat_filt" offset="0" size="16">
+				<description>Signed number that is a digitally filtered version of the A/D measurement of vbat. The value is based on the A/D value, vbat, which has a scaling factor of 384.8µV/LSB for each multiple of 6V chosen by the CELLS0/CELLS1 pins. To compute the total battery voltage multiply this value by 1, 2, 3 or 4 representing a 6V, 12V 18V or 24V battery respectively.</description>
+				<format name="vbat_sla_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="BSR_CHARGE_CURRENT_REG" value="0x48">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="bsr_charge_current" offset="0" size="16">
+				<description>Signed number that is the battery charge current that existed during the battery series resistance measurement. The value is based on the A/D value, ibat, which has a scaling factor of 1.466µV / RSNSB amperes/LSB. If the battery series resistance (bsr) test runs with ibat values less than icharge_over_10, the accuracy of the test is questionable due to low signal level and bsr_questionable will set. Rerunning the battery series resistance test earlier in the charge cycle with higher ibat, and therefore higher bsr_charge_current, will give the most accurate result.</description>
+				<preset name="icharge_over_10" value="2184"/>
+				<format name="ibat_format"/>
+			</bit_field>
+		</command_code>
+		<command_code name="TELEMETRY_STATUS_REG" value="0x4A">
+			<description>Telemetry system status register</description>
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="bsr_questionable" offset="1" size="1">
+				<description>Indicates that the battery series resistance measurement is questionable due to low signal, specifically that ibat was less than icharge_over_10, when the last battery series resistance (bsr) measurement was taken. bsr_charge_current contains the ibat A/D value present when the battery series resistance measurement was made.</description>
+			</bit_field>
+			<bit_field category="usr_status" name="telemetry_valid" offset="0" size="1">
+				<description>Indicates that the telemetry system autozero amplifiers have had sufficient time, approximately 12ms, to null their offsets. Battery charging is disabled until the telemetry system warm up time has passed.</description>
+			</bit_field>
+		</command_code>
+		<command_code name="INPUT_UNDERVOLTAGE_DAC_REG" value="0x4B">
+			<access mode="user_i2c_mode" type="read"/>
+			<bit_field category="usr_status" name="input_undervoltage_dac" offset="0" size="8">
+				<description>Input undervoltage regulation digital to analog converter value. The regulation voltage is given by (input_undervoltage_dac + 1) × 140.625mV. If enabled, the MPPT algorithm will directly manipulate this value. Otherwise it will follow input_undervoltage_setting.</description>
+				<format name="vin_uvcl"/>
+			</bit_field>
+		</command_code>
+	</chip>
+	<format_definitions>
+		<constant_definition name="RSNSI" value="0.010"/>
+		<constant_definition name="RSNSB" value="0.010"/>
+		<constant_definition name="RNTCBIAS" value="10000.0"/>
+		<constant_definition name="RNTCSER" value="0.0"/>
+		<constant_definition name="VINDIV" value="30.0"/>
+		<constant_definition name="VOUTDIV" value="(30.0 * 1.00232)"/>
+		<constant_definition name="BATDIV" value="3.5"/>
+		<constant_definition name="AVPROG" value="37.5"/>
+		<constant_definition name="AVCLPROG" value="37.5"/>
+		<constant_definition name="ADCGAIN" value="18191.0"/>
+		<constant_definition name="VREF" value="1.2"/>
+		<constant_definition name="Rm40" value="214063.67"/>
+		<constant_definition name="Rm34" value="152840.30"/>
+		<constant_definition name="Rm28" value="110480.73"/>
+		<constant_definition name="Rm21" value="76798.02"/>
+		<constant_definition name="Rm14" value="54214.99"/>
+		<constant_definition name="Rm6" value="37075.65"/>
+		<constant_definition name="R4" value="23649.71"/>
+		<constant_definition name="R33" value="7400.97"/>
+		<constant_definition name="R44" value="5001.22"/>
+		<constant_definition name="R53" value="3693.55"/>
+		<constant_definition name="R62" value="2768.21"/>
+		<constant_definition name="R70" value="2167.17"/>
+		<constant_definition name="R78" value="1714.08"/>
+		<constant_definition name="R86" value="1368.87"/>
+		<constant_definition name="R94" value="1103.18"/>
+		<constant_definition name="R102" value="896.73"/>
+		<constant_definition name="R110" value="734.86"/>
+		<constant_definition name="R118" value="606.86"/>
+		<constant_definition name="R126" value="504.80"/>
+		<constant_definition name="R134" value="422.81"/>
+		<constant_definition name="R142" value="356.45"/>
+		<constant_definition name="R150" value="302.36"/>
+		<format_definition name="iinlim" signed="False">
+			<description>Convert from amperes to the iinlim setting.</description>
+			<transformed_units>A</transformed_units>
+			<piecewise_linear_points>
+				<point native="0" transformed="VREF / 64 / AVCLPROG / RSNSI"/>
+				<point native="1" transformed="VREF / 64 / AVCLPROG / RSNSI * 2"/>
+			</piecewise_linear_points>
+		</format_definition>
+		<format_definition name="vcharge_sla" signed="False">
+			<description>Convert from volts to the vcharge_sla setting.</description>
+			<transformed_units>V</transformed_units>
+			<piecewise_linear_points>
+				<point native="0" transformed="6"/>
+				<point native="1" transformed="6 + 1. / 35"/>
+			</piecewise_linear_points>
+		</format_definition>
+		<format_definition name="vabsorb_sla_delta" signed="False">
+			<description>Convert the vabsorb_delta setting to Volts for SLA cells.</description>
+			<transformed_units>V</transformed_units>
+			<piecewise_linear_points>
+				<point native="0" transformed="0"/>
+				<point native="1" transformed="1. / 35"/>
+			</piecewise_linear_points>
+		</format_definition>
+		<format_definition name="vequalize_sla_delta" signed="False">
+			<description>Convert the v_equalize_delta setting to Volts for SLA cells.</description>
+			<transformed_units>V</transformed_units>
+			<piecewise_linear_points>
+				<point native="0" transformed="0"/>
+				<point native="1" transformed="1. / 35"/>
+			</piecewise_linear_points>
+		</format_definition>
+		<format_definition name="vin_uvcl" signed="False">
+			<description>Convert from volts to the vin_uvcl setting.</description>
+			<transformed_units>V</transformed_units>
+			<piecewise_linear_points>
+				<point native="0" transformed="VREF / 256 * VINDIV"/>
+				<point native="1" transformed="VREF / 256 * VINDIV * 2"/>
+			</piecewise_linear_points>
+		</format_definition>
+		<format_definition name="icharge" signed="False">
+			<description>Convert from amperes to the charge_current_setting.</description>
+			<transformed_units>A</transformed_units>
+			<piecewise_linear_points>
+				<point native="0" transformed="VREF / 32 / AVPROG / RSNSB"/>
+				<point native="1" transformed="VREF / 32 / AVPROG / RSNSB * 2"/>
+			</piecewise_linear_points>
+		</format_definition>
+		<format_definition name="vbat_sla_format" signed="True">
+			<description>Convert from volts to the vbat ADC reading. To get the total battery voltage multiply this value by 1, 2, 3 or 4 representing a 6V, 12V 18V or 24V battery respectively as set by the CELLS0/CELLS1 pins.</description>
+			<transformed_units>V</transformed_units>
+			<piecewise_linear_points>
+				<point native="0" transformed="0"/>
+				<point native="1" transformed="BATDIV / ADCGAIN * 2"/>
+			</piecewise_linear_points>
+		</format_definition>
+		<format_definition name="ibat_format" signed="True">
+			<description>Convert from amperes to the ibat ADC reading.</description>
+			<transformed_units>A</transformed_units>
+			<piecewise_linear_points>
+				<point native="0" transformed="0"/>
+				<point native="1" transformed="1 / RSNSB / AVPROG / ADCGAIN"/>
+			</piecewise_linear_points>
+		</format_definition>
+		<format_definition name="vout_format" signed="True">
+			<description>Convert from volts to the vout ADC reading.</description>
+			<transformed_units>V</transformed_units>
+			<piecewise_linear_points>
+				<point native="0" transformed="0"/>
+				<point native="1" transformed="VOUTDIV / ADCGAIN"/>
+			</piecewise_linear_points>
+		</format_definition>
+		<format_definition name="vin_format" signed="True">
+			<description>Convert from volts to the vin ADC reading.</description>
+			<transformed_units>V</transformed_units>
+			<piecewise_linear_points>
+				<point native="0" transformed="0"/>
+				<point native="1" transformed="VINDIV / ADCGAIN"/>
+			</piecewise_linear_points>
+		</format_definition>
+		<format_definition name="iin_format" signed="True">
+			<description>Convert from amperes to the iin ADC reading.</description>
+			<transformed_units>A</transformed_units>
+			<piecewise_linear_points>
+				<point native="0" transformed="0"/>
+				<point native="1" transformed="1 / RSNSI / AVCLPROG / ADCGAIN"/>
+			</piecewise_linear_points>
+		</format_definition>
+		<format_definition name="bsr_format_sla" signed="False">
+			<description>Convert from Ω to the bsr ADC reading. To get the total battery impedance multiply this value by 1, 2, 3 or 4 representing a 6V, 12V, 18V or 24V battery respectively as set by the CELLS0/CELLS1 pins.</description>
+			<transformed_units>Ω</transformed_units>
+			<piecewise_linear_points>
+				<point native="0" transformed="0"/>
+				<point native="1" transformed="RSNSB * AVPROG * BATDIV / 65536 * 2"/>
+			</piecewise_linear_points>
+		</format_definition>
+		<format_definition name="die_temp_format" signed="True">
+			<description>Convert from °C to the die_temp ADC reading.</description>
+			<transformed_units>°C</transformed_units>
+			<piecewise_linear_points>
+				<point native="0" transformed="-264.4"/>
+				<point native="1" transformed="-264.4 + 1 / 46.557"/>
+			</piecewise_linear_points>
+		</format_definition>
+		<format_definition name="NTCS0402E3103FLT" signed="True">
+			<description>Convert from °C to the thermistor ADC reading.</description>
+			<transformed_units>°C</transformed_units>
+			<piecewise_linear_points>
+				<point native="(Rm40 + RNTCSER) / (Rm40 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="-40"/>
+				<point native="(Rm34 + RNTCSER) / (Rm34 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="-34"/>
+				<point native="(Rm28 + RNTCSER) / (Rm28 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="-28"/>
+				<point native="(Rm21 + RNTCSER) / (Rm21 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="-21"/>
+				<point native="(Rm14 + RNTCSER) / (Rm14 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="-14"/>
+				<point native="(Rm6 + RNTCSER) / (Rm6 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="-6"/>
+				<point native="(R4 + RNTCSER) / (R4 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="4"/>
+				<point native="(R33 + RNTCSER) / (R33 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="33"/>
+				<point native="(R44 + RNTCSER) / (R44 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="44"/>
+				<point native="(R53 + RNTCSER) / (R53 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="53"/>
+				<point native="(R62 + RNTCSER) / (R62 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="62"/>
+				<point native="(R70 + RNTCSER) / (R70 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="70"/>
+				<point native="(R78 + RNTCSER) / (R78 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="78"/>
+				<point native="(R86 + RNTCSER) / (R86 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="86"/>
+				<point native="(R94 + RNTCSER) / (R94 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="94"/>
+				<point native="(R102 + RNTCSER) / (R102 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="102"/>
+				<point native="(R110 + RNTCSER) / (R110 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="110"/>
+				<point native="(R118 + RNTCSER) / (R118 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="118"/>
+				<point native="(R126 + RNTCSER) / (R126 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="126"/>
+				<point native="(R134 + RNTCSER) / (R134 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="134"/>
+				<point native="(R142 + RNTCSER) / (R142 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="142"/>
+				<point native="(R150 + RNTCSER) / (R150 + RNTCSER + RNTCBIAS) * ADCGAIN * VREF" transformed="150"/>
+			</piecewise_linear_points>
+		</format_definition>
+	</format_definitions>
+</register_map>
