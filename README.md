@@ -19,3 +19,4 @@ HOW TO:
 3) Power the DC2038A board and plug in the USB connector.
 4) Run EZ_DC2038A.py
 5) Enter the COM port number of the DC2038A when requested.
+6) Stand-by for the AWESOME!
