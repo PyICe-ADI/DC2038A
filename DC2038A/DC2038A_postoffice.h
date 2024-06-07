@@ -13,10 +13,10 @@
 /****************************************************************************
  * Mail Box Addresses                                                       *
  ****************************************************************************/
-#define PYICE_GUI_ADDRESS       1   // Must match expected Python addresses
-#define SMBUS_ADDRESS           2   // Must match expected Python addresses
-#define IDENTIFY_ADDRESS        3   // Must match expected Python addresses
-#define SMBALERT_PIN_ADDRESS    4   // Must match expected Python addresses
+#define PYICE_GUI_ADDRESS   1   // Must match expected Python addresses
+#define SMBUS_ADDRESS       2   // Must match expected Python addresses
+#define IDENTIFY_ADDRESS    3   // Must match expected Python addresses
+#define SMBALERT_ADDRESS    4   // Must match expected Python addresses
 
 /****************************************************************************
  * Mail Box Sizes                                                           *
@@ -30,15 +30,15 @@
 #define SMBUS_INBOX_SIZE            START_OF_SMBUS_DATA_IN + 3 * 256    // Write list will have: [ADDR|DATA|ADDR|DATA....] where size(data) can be 16
 #define SMBUS_OUTBOX_SIZE           3 * 256                             // Supports read word plus 1 status byte per read word
 
-#define SMBALERT_PIN_INBOX_SIZE     0
-#define SMBALERT_PIN_OUTBOX_SIZE    1
+#define SMBALERT_INBOX_SIZE     0
+#define SMBALERT_OUTBOX_SIZE    1
 
 /****************************************************************************
  * Mailbox Externs for the clients to find                                  *
  ****************************************************************************/
-extern Mailbox<SMBUS_INBOX_SIZE,        SMBUS_OUTBOX_SIZE>          smbus_mailbox;
-extern Mailbox<IDENTIFY_INBOX_SIZE,     IDENTIFY_OUTBOX_SIZE>       identify_mailbox;
-extern Mailbox<SMBALERT_PIN_INBOX_SIZE, SMBALERT_PIN_OUTBOX_SIZE>   smbalert_pin_mailbox;
+extern Mailbox<SMBUS_INBOX_SIZE,    SMBUS_OUTBOX_SIZE>      smbus_mailbox;
+extern Mailbox<IDENTIFY_INBOX_SIZE, IDENTIFY_OUTBOX_SIZE>   identify_mailbox;
+extern Mailbox<SMBALERT_INBOX_SIZE, SMBALERT_OUTBOX_SIZE>   smbalert_mailbox;
 
 void DC2038A_process_mail();
 

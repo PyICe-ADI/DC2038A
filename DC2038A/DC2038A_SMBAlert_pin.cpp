@@ -10,12 +10,12 @@
  ****************************************************************************/
 void DC2038A_get_smbalert_pin()
 {
-    if (smbalert_pin_mailbox.inbox_status == PACKET_PRESENT)
+    if (smbalert_mailbox.inbox_status == PACKET_PRESENT)
     {
-        smbalert_pin_mailbox.to_id = smbalert_pin_mailbox.from_id;
-        smbalert_pin_mailbox.outbox[0] = digitalRead(SMBALERTPIN);
-        smbalert_pin_mailbox.outbox_msg_size = SMBALERT_PIN_OUTBOX_SIZE;
-        smbalert_pin_mailbox.inbox_status = PACKET_ABSENT;
-        smbalert_pin_mailbox.outbox_status = PACKET_PRESENT;
+        smbalert_mailbox.to_id = smbalert_mailbox.from_id;
+        smbalert_mailbox.outbox[0] = digitalRead(SMBALERTPIN);
+        smbalert_mailbox.outbox_msg_size = SMBALERT_OUTBOX_SIZE;
+        smbalert_mailbox.inbox_status = PACKET_ABSENT;
+        smbalert_mailbox.outbox_status = PACKET_PRESENT;
     }
 }
