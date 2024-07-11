@@ -9,7 +9,7 @@ This project attempts to reboot the DC2038A with a fresh new firmware stack base
 HOW TO:
 
 1) From the "Tools --> Board Manager" menu search and install "Arduino SAMD Boards (32-bits ARM Cortex M0+)".
-2) Set thee board to "Arduino Zero Native USB Port" (SAMD21 processor).
+2) Set the board to "Arduino Zero Native USB Port" (SAMD21 processor).
 2) The DC2038A will need to be flashed with the firmware located here using the Arduino Software IDE.
     • The following libraries will need to be added to the Arduino depdendency list through the "Sktech -> Include Library" menu.
         • AsyncDelay
