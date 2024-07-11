@@ -8,15 +8,17 @@ This project attempts to reboot the DC2038A with a fresh new firmware stack base
 
 HOW TO:
 
-1) The DC2038A will need to be flashed with the firmware located here using the Arduino Software IDE.
-    • The board type should be selected as "Arduino Zero Native USB Port" (SAMD21 processor).
+1) From the "Tools --> Board Manager" menu search and install "Arduino SAMD Boards (32-bits ARM Cortex M0+)".
+2) Set thee board to "Arduino Zero Native USB Port" (SAMD21 processor).
+2) The DC2038A will need to be flashed with the firmware located here using the Arduino Software IDE.
     • The following libraries will need to be added to the Arduino depdendency list through the "Sktech -> Include Library" menu.
         • AsyncDelay
         • FlashStorage_SAMD
         • SoftWire
         
-2) PIP Install PyICe or create a development environment with PyICe directly from GitHub.
-3) Power the DC2038A board and plug in the USB connector.
-4) Run EZ_DC2038A.py
-5) Enter the COM port number of the DC2038A when requested.
-6) Stand-by for the AWESOME!
+
+3) PIP Install PyICe or create a development environment with PyICe directly from GitHub.
+4) Power the DC2038A board and plug in the USB connector.
+5) Run EZ_DC2038A.py
+6) Enter the COM port number of the DC2038A when requested.
+7) Stand-by for the AWESOME!
